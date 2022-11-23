@@ -64,6 +64,7 @@ public class SecurityConfig {
 		             .antMatchers("/auth/**").permitAll()
 		             .antMatchers("/api/attendance-manage").hasRole("ADMIN")
 		             .antMatchers("/api/**").hasAnyRole("MEMBER", "APP_AUTH", "ADMIN")
+		             .antMatchers("/api/room/**").permitAll()
 		         .and()
 		         	.cors()
 		         .and()
@@ -78,7 +79,7 @@ public class SecurityConfig {
         CorsConfiguration configuration = new CorsConfiguration();
         // 로컬 React에서 오는 요청은 CORS 허용해준다.
         configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000" ));
-        configuration.setAllowedMethods(Arrays.asList("GET", "PUT", "POST", "DELETE"));
+        configuration.setAllowedMethods(Arrays.asList("GET", "PUT", "POST", "DELETE", "PATCH"));
         configuration.setAllowedHeaders(Arrays.asList("Access-Control-Allow-Origin", "Content-Type", "Access-Control-Allow-Headers", "Authorization", "X-Requested-With"));
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
