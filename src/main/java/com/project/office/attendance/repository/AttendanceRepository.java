@@ -31,18 +31,18 @@ public interface AttendanceRepository extends JpaRepository<Attendance, Long> {
 		   )
 	Page<Attendance> findByAttDate(Pageable pageable, String attDate);
 
-	/* 출근 조회 */
+	/* 퇴근 등록을 위한 출근 조회 */
 	@Query("SELECT a " +
 			 "FROM Attendance a " +
 			"WHERE a.attIn < :now and a.attIn > :past and a.member.memberNo = :memberNo"
 			)
 	Optional<Attendance> findByMemberAndAttIn(@Param("now") LocalDateTime today, @Param("past") LocalDateTime past, @Param("memberNo") Long memberNo);
 
-	/* 퇴근 조회 */
+	/* 출퇴근 조회 */
 	@Query("SELECT a " +
 			"FROM Attendance a " +
-		   "WHERE a.attOut >= :start and a.attOut < :future and a.member.memberNo = :memberNo"
+		   "WHERE (a.attIn >= :start and a.attIn < :future) or (a.attIn >= :start and a.attIn < :future and a.attOut >= :start and a.attOut < :future) and a.member.memberNo = :memberNo"
 			)
-	Optional<Attendance> findByMemberAndAttOut(@Param("start") LocalDateTime start, @Param("future") LocalDateTime end, @Param("memberNo") Long memberNo);
+	Optional<Attendance> findByMemberAndAttInAndAttOut(@Param("start") LocalDateTime start, @Param("future") LocalDateTime end, @Param("memberNo") Long memberNo);
 
 }

@@ -57,18 +57,18 @@ public class AttendanceController {
 		
 	}
 	
-	/* 출근 조회 */
-	@GetMapping("/attendance/in")
-	public ResponseEntity<ResponseDTO> selectAttIn(@AuthenticationPrincipal MemberDTO member) {
+	/* 출퇴근 조회 */
+	@GetMapping("/attendance/inout")
+	public ResponseEntity<ResponseDTO> selectAtt(@AuthenticationPrincipal MemberDTO member) {
 		
-		log.info("[AttendanceController] selectAttIn Start ====================");
+		log.info("[AttendanceController] selectAtt Start ====================");
 		log.info("[AttendanceController] member : {}", member);
 		
-		log.info("[AttendanceController] selectAttIn End ====================");
+		log.info("[AttendanceController] selectAtt End ====================");
 		
 		return ResponseEntity
 				.ok()
-				.body(new ResponseDTO(HttpStatus.OK, "출근 조회 완료", attendanceService.selectAttIn(member)));
+				.body(new ResponseDTO(HttpStatus.OK, "출퇴근 조회 완료", attendanceService.selectAtt(member)));
 		
 	}
 	
@@ -93,20 +93,20 @@ public class AttendanceController {
 		
 	}
 	
-	/* 퇴근 조회 */
-	@GetMapping("/attendance/out")
-	public ResponseEntity<ResponseDTO> selectAttOut(@AuthenticationPrincipal MemberDTO member) {
-		
-		log.info("[AttendanceController] selectAttOut Start ====================");
-		log.info("[AttendanceController] member : {}", member);
-		
-		log.info("[AttendanceController] selectAttOut End ====================");
-		
-		return ResponseEntity
-				.ok()
-				.body(new ResponseDTO(HttpStatus.OK, "퇴근 조회 완료", attendanceService.selectAttOut(member)));
-		
-	}
+//	/* 퇴근 조회 */
+//	@GetMapping("/attendance/out")
+//	public ResponseEntity<ResponseDTO> selectAttOut(@AuthenticationPrincipal MemberDTO member) {
+//		
+//		log.info("[AttendanceController] selectAttOut Start ====================");
+//		log.info("[AttendanceController] member : {}", member);
+//		
+//		log.info("[AttendanceController] selectAttOut End ====================");
+//		
+//		return ResponseEntity
+//				.ok()
+//				.body(new ResponseDTO(HttpStatus.OK, "퇴근 조회 완료", attendanceService.selectAttOut(member)));
+//		
+//	}
 	
 	/* 내 근태 월별 목록 조회 */
 	@GetMapping("/attendance/my")

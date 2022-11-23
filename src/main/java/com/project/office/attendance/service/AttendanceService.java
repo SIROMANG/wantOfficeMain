@@ -50,28 +50,23 @@ public class AttendanceService {
 		
 	}
 	
-	/* 출근 조회 */
-	public String selectAttIn(MemberDTO member) {
+	/* 출퇴근 조회 */
+	public AttendanceDTO selectAtt(MemberDTO member) {
 		
-		log.info("[AttendanceService] selectAttIn Start ====================");
+		log.info("[AttendanceService] selectAtt Start ====================");
 		log.info("[AttendanceService] member : {}", member);
 		
 		Long memberNo = member.getMemberNo();
 		
-		LocalDateTime today = LocalDateTime.now();
 		LocalDateTime start = LocalDate.now().atStartOfDay();
+		LocalDateTime end = LocalDateTime.now().with(LocalTime.MAX);
 		
-		Attendance attendance = attendanceRepository.findByMemberAndAttIn(today, start, memberNo)
+		Attendance attendance = attendanceRepository.findByMemberAndAttInAndAttOut(start, end, memberNo)
 				.orElseThrow(() -> new RuntimeException("오늘 출근 시간이 존재하지 않습니다."));
 		
-		LocalDateTime attIn = attendance.getAttIn();
+		log.info("[AttendanceService] selectAtt End ====================");
 		
-		String attInString = attIn.toString();
-		String str = attInString.substring(11, 16);
-		
-		log.info("[AttendanceService] selectAttIn End ====================");
-		
-		return str;
+		return modelMapper.map(attendance, AttendanceDTO.class);
 		
 	}
 
@@ -106,7 +101,7 @@ public class AttendanceService {
 		Duration duration = Duration.between(In, Out);
 		Long time = duration.getSeconds();
 		Long hour = time/(60*60);
-		Long minute = time/60;
+		Long minute = time%60;
 		
 		String attTime = (hour + "시간 " + minute + "분");
 		
@@ -132,32 +127,6 @@ public class AttendanceService {
 		
 	}
 	
-	/* 퇴근 조회 */
-	public String selectAttOut(MemberDTO member) {
-		
-		log.info("[AttendanceService] selectAttOut Start ====================");
-		log.info("[AttendanceService] member : {}", member);
-		
-		Long memberNo = member.getMemberNo();
-		
-		LocalDateTime start = LocalDate.now().atStartOfDay();
-		LocalDateTime end = LocalDateTime.now().with(LocalTime.MAX);
-		
-		Attendance attendance = attendanceRepository.findByMemberAndAttOut(start, end, memberNo)
-				.orElseThrow(() -> new RuntimeException("오늘 출근 시간이 존재하지 않습니다."));
-		
-		LocalDateTime attOut = attendance.getAttOut();
-		
-		String attOutString = attOut.toString();
-		String str = attOutString.substring(11, 16);
-		
-		log.info("[AttendanceService] str : {}", str);
-		log.info("[AttendanceService] selectAttOut Out ====================");
-		
-		return str;
-		
-	}
-
 	/* 내 근태 월별 목록 조회 */
 	public Page<AttendanceDTO> getMyAttList(MemberDTO member, int page, String attDate) {
 		
