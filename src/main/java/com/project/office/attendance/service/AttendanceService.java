@@ -64,7 +64,7 @@ public class AttendanceService {
 		LocalDateTime end = LocalDateTime.now().with(LocalTime.MAX);
 		
 		Attendance attendance = attendanceRepository.findByMemberAndAttInAndAttOut(start, end, memberNo)
-				.orElseThrow(() -> new RuntimeException("오늘 출근 시간이 존재하지 않습니다."));
+				.orElseThrow(() -> new IllegalArgumentException("오늘 출근 시간이 존재하지 않습니다."));
 		
 		log.info("[AttendanceService] selectAtt End ====================");
 		
@@ -85,7 +85,7 @@ public class AttendanceService {
 		
 		// Member와 오늘 날짜로 출근 찍힌 행 기준으로 조회
 		Attendance oriAttendance = attendanceRepository.findByMemberAndAttIn(today, start, attendanceDTO.getMember().getMemberNo())
-				.orElseThrow(() -> new RuntimeException("오늘 출근 시간이 존재하지 않습니다."));
+				.orElseThrow(() -> new IllegalArgumentException("오늘 출근 시간이 존재하지 않습니다."));
 		
 		oriAttendance.setAttOut(now);
 		

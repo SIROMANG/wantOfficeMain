@@ -107,7 +107,7 @@ public class OffService {
 		log.info("[OffService] offNo : {}", offNo);
 		
 		Off off = offRepository.findById(offNo)
-				.orElseThrow(() -> new RuntimeException("해당 연차가 존재하지 않습니다."));
+				.orElseThrow(() -> new IllegalArgumentException("해당 연차가 존재하지 않습니다."));
 		OffDTO offDTO = modelMapper.map(off, OffDTO.class);
 		
 		log.info("[OffService] selectOff End ====================");
@@ -124,7 +124,7 @@ public class OffService {
 		log.info("[OffService] offDTO : ", offDTO);
 		
 		Off foundOff = offRepository.findById(offDTO.getOffNo())
-				.orElseThrow(() -> new RuntimeException("해당 연차가 존재하지 않습니다."));
+				.orElseThrow(() -> new IllegalArgumentException("해당 연차가 존재하지 않습니다."));
 		
 		foundOff.setOffResult("승인");
 		
@@ -144,7 +144,7 @@ public class OffService {
 		log.info("[OffService] offDTO : ", offDTO);
 		
 		Off foundOff = offRepository.findById(offDTO.getOffNo())
-				.orElseThrow(() -> new RuntimeException("해당 연차가 존재하지 않습니다."));
+				.orElseThrow(() -> new IllegalArgumentException("해당 연차가 존재하지 않습니다."));
 		
 		foundOff.setOffResult("반려");
 		
