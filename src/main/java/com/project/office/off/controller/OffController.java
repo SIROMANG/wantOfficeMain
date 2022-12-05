@@ -166,5 +166,14 @@ public class OffController {
 		
 	}
 	
+	/* Calendar에서의 부서 연차조회*/
+	@GetMapping("/calendar/offs")
+	public ResponseEntity<ResponseDTO> calendarOff(@AuthenticationPrincipal MemberDTO member) {
+		
+		log.info("[OffController] member : {}", member);
+		
+		return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK, "캘린더 부서원 연차 조회 완료", offService.calendarOff(member.getDept().getDeptNo())));
+	}
+	
 
 }

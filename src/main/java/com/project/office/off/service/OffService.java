@@ -1,6 +1,8 @@
 package com.project.office.off.service;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
@@ -176,6 +178,17 @@ public class OffService {
 		
 		return offDTO;
 		
+	}
+	
+	public List<OffDTO> calendarOff(Long deptNo) {
+		
+		log.info("[OffController] deptNo1 : {}", deptNo);
+
+		List<Off> calendarOffList = offRepository.findByDept(deptNo);
+		
+		log.info("[OffController] deptNo2 : {}", deptNo);
+		
+		return calendarOffList.stream().map(offList -> modelMapper.map(offList, OffDTO.class)).collect(Collectors.toList());
 	}
 
 }

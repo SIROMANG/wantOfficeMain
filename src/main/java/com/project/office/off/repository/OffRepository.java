@@ -1,5 +1,6 @@
 package com.project.office.off.repository;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.domain.Page;
@@ -27,4 +28,7 @@ public interface OffRepository extends JpaRepository<Off, Long> {
 	@Query("select o from Off o where o.member.memberNo = :memberNo and o.offNo = :offNo")
 	Optional<Off> findByMemberAndOffNo(@Param("memberNo") Long memberNo, @Param("offNo") Long offNo);
 
+	/* Calendar 에서 부서원 연차 조회 */
+	@Query(value = "SELECT o FROM Off o WHERE o.member.dept.deptNo = :deptNo")
+	List<Off> findByDept(@Param("deptNo") Long deptNo);
 }

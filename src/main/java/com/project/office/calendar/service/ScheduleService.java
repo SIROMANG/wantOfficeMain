@@ -6,13 +6,11 @@ import java.util.stream.Collectors;
 import javax.transaction.Transactional;
 
 import org.modelmapper.ModelMapper;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Service;
 
 import com.project.office.calendar.dto.ScheduleDTO;
 import com.project.office.calendar.entity.Schedule;
 import com.project.office.calendar.repository.ScheduleRepository;
-import com.project.office.dept.entity.Dept;
 import com.project.office.member.dto.MemberDTO;
 import com.project.office.member.entity.Member;
 
