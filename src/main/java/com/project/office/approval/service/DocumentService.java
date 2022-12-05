@@ -1,6 +1,7 @@
 package com.project.office.approval.service;
 
-import java.util.Optional;
+
+import javax.transaction.Transactional;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
@@ -10,9 +11,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.project.office.approval.dto.DocumentDTO;
-import com.project.office.approval.dto.ProgressDTO;
 import com.project.office.approval.entity.Document;
-import com.project.office.approval.entity.Progress;
 import com.project.office.approval.repository.DocumentRepository;
 
 import lombok.extern.slf4j.Slf4j;
@@ -57,6 +56,17 @@ public class DocumentService {
 		DocumentDTO documentDTO = modelMapper.map(document, DocumentDTO.class);
 
 		return documentDTO;
+	}
+	
+	/* 결재등록 */
+	@Transactional
+	public DocumentDTO insertDocument(DocumentDTO documentDTO) {
+		
+		documentRepository.save(modelMapper.map(documentDTO, Document.class));
+		
+		return documentDTO;
+		
+		
 	}
 
 	

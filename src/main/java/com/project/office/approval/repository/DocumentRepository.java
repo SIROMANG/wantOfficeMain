@@ -22,4 +22,8 @@ public interface DocumentRepository extends JpaRepository<Document, Long>{
 			+ "d where d.docNo =:docNo" )
 	Optional<Document> findBydocNo(@Param("docNo") Long docNo);
 	
+	
+
+	
+	
 }
