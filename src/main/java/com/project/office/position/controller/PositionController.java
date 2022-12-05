@@ -37,7 +37,7 @@ public class PositionController {
 		
 		
 		return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK, "직위 목록 조회 완료", positionService.positionList()));
-	}
+	}																									  
 	
 	// 직위 삭제
 	@DeleteMapping("/position-management/{positionNo}")
