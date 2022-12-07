@@ -50,9 +50,6 @@ public class Reservation {
 	@Column(name = "RESERVATION_PURPOSE")
 	private String reservationPurpose;
 	
-	@Column(name = "RESERVATION_SETTING")
-	private String reservationSetting;
-	
 	@ManyToOne
 	@JoinColumn(name = "ROOM_NO")
 	private Room room;
@@ -68,12 +65,11 @@ public class Reservation {
 	private String reservationTimeOut;
 
 	public void update(Integer reservationUseTime , String reservationStatus,
-			String reservationPurpose, String reservationSetting, String reservationTimeIn, String reservationTimeOut) {
+			String reservationPurpose, String reservationTimeIn, String reservationTimeOut) {
 		
 		this.reservationUseTime = reservationUseTime;
 		this.reservationStatus = reservationStatus;
 		this.reservationPurpose = reservationPurpose;
-		this.reservationSetting = reservationSetting;
 		this.reservationTimeIn = reservationTimeIn;
 		this.reservationTimeOut = reservationTimeOut;
 		

@@ -18,7 +18,6 @@ public class ReservationDTO {
 	private LocalDateTime reservationDate;
 	private String reservationStatus;
 	private String reservationPurpose;
-	private String reservationSetting;
 	private RoomDTO room;
 	private MemberDTO member;
 	private String reservationTimeIn;

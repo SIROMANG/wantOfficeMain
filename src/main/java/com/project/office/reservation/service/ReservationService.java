@@ -140,7 +140,6 @@ public class ReservationService {
 				reservationDTO.getReservationUseTime(),
 				reservationDTO.getReservationStatus(),
 				reservationDTO.getReservationPurpose(),
-				reservationDTO.getReservationSetting(),
 				reservationDTO.getReservationTimeIn(),
 				reservationDTO.getReservationTimeOut());
 

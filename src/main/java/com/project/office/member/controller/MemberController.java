@@ -94,12 +94,4 @@ public class MemberController {
 	      
 	}
 	
-	/* 내 명함 상세 조회 */
-	@GetMapping("/card/detail")
-	public ResponseEntity<ResponseDTO> selectMyCardDetail(@AuthenticationPrincipal MemberDTO memberDTO) {
-		
-		return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK, "내 명함 상세 조회 완료", memberService.selectMyCardDetail(memberDTO)));
-		
-	}
-	
 }
